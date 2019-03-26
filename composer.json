@@ -1,0 +1,21 @@
+{
+    "name": "joetannenbaum/obfuscate",
+    "description": "Obfuscate strings in HTML using JavaScript (e.g. mailto links)",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joe Tannenbaum",
+            "email": "joe@joe.codes"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.1.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Obfuscate\\": "src/Obfuscate"
+        }
+    }
+}
