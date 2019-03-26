@@ -29,3 +29,11 @@ document.write(eciujlgqbmpdkfayxrhtvsonzw.map(function(c) {
 }).join(''));
 </script>
 ```
+
+## Laravel
+
+If you're using Laravel, this package automatically adds a Blade helper:
+
+```blade
+@obfuscate('<a href="mailto:obfuscate@joe.codes">obfuscate@joe.codes</a>')
+```
