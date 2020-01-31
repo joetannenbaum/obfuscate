@@ -6,53 +6,37 @@ class Obfuscate
 {
     public static function str($str)
     {
-        $parts = str_split($str);
+        return array_reduce(str_split($str), function ($carry, $current) {
+            return $carry . self::getSymbol($current);
+        }, '');
+    }
 
-        // Make a copy of the array before shuffling
-        $shuffled = $parts;
+    public static function getSymbol($letter)
+    {
+        if (ord($letter) > 128) {
+            return $letter;
+        }
 
-        shuffle($shuffled);
+        // To properly obfuscate the value, we will randomly convert each letter to
+        // its entity or hexadecimal representation, keeping a bot from sniffing
+        // the randomly obfuscated letters out of the string on the responses.
+        switch (rand(1, 3)) {
+            case 1:
+                return '&#' . ord($letter) . ';';
+            case 2:
+                return '&#x' . dechex(ord($letter)) . ';';
+            case 3:
+                return $letter;
+        }
+    }
 
-        $dictionary = array_map(function ($part) use ($shuffled) {
-            return array_search($part, $shuffled);
-        }, $parts);
-
-        $js_vars = array_map(function ($collection) {
-            $az = range('a', 'z');
-
-            shuffle($az);
-
-            $var_name = implode('', $az);
-
-            return [
-                'var' => $var_name,
-                'arr' => json_encode($collection),
-            ];
-        }, [$shuffled, $dictionary]);
-
-        list($shuffled_var, $dictionary_var) = $js_vars;
-
-        $script = sprintf(
-            implode(
-                '',
-                [
-                '<script>',
-                    'var %s = %s;',
-                    'var %s = %s;',
-                    'document.write(',
-                        '%s.map(function(c) { return %s[c]; }).join(\'\')',
-                    ');',
-                '</script>',
-                ]
-            ),
-            $shuffled_var['var'],
-            $shuffled_var['arr'],
-            $dictionary_var['var'],
-            $dictionary_var['arr'],
-            $dictionary_var['var'],
-            $shuffled_var['var']
+    public static function mailto($email)
+    {
+        return sprintf(
+            '<a href="%s%s">%s</a>',
+            self::str('mailto:'),
+            self::str($email),
+            self::str($email)
         );
-
-        return $script;
     }
 }

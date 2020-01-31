@@ -17,5 +17,9 @@ class ServiceProvider extends BaseServiceProvider
         Blade::directive('obfuscate', function ($expression) {
             return "<?php echo Obfuscate\Obfuscate::str($expression); ?>";
         });
+
+        Blade::directive('mailto', function ($expression) {
+            return "<?php echo Obfuscate\Obfuscate::mailto($expression); ?>";
+        });
     }
 }
