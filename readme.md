@@ -1,6 +1,6 @@
 # Obfuscate
 
-A quick-and-dirty library to obfuscate sensitive strings in HTML by dynamically creating JavaScript to print them out. Not foolproof by any means.
+A quick-and-dirty library to obfuscate sensitive strings by dynamically creating special characters to print them out. Not foolproof by any means.
 
 ## Installation
 
@@ -15,19 +15,16 @@ use Obfuscate\Obfuscate;
 
 require __DIR__ . '/vendor/autoload.php';
 
-echo Obfuscate::str('<a href="mailto:obfuscate@joe.codes">obfuscate@joe.codes</a>'));
+echo Obfuscate::str('this is a secret!');
+echo Obfuscate::mailto('obfuscate@joe.codes');
 ```
 
-...results in (different every time):
+...results in (different every time, still renders properly in HTML):
 
 ```html
-<script>
-var izbsxrwpgacnfjulthovqmydek = ["o","=",":","f","o","s","\/","h","\"","t","d","\"","c","s",">","t","u","b","e","e","o","c","o","d","l","a","f","e","c","<"," ","<",".","s","o","e","j","e","o",">","a","s","@","r","t","f","a","c","i","u","e",".","a","@","j","o","m","b","e","a"];
-var eciujlgqbmpdkfayxrhtvsonzw = [29,25,30,7,43,18,3,1,8,56,25,48,24,9,0,2,0,17,3,16,5,12,25,9,18,42,36,0,18,32,12,0,10,18,5,8,14,0,17,3,16,5,12,25,9,18,42,36,0,18,32,12,0,10,18,5,29,6,25,14];
-document.write(eciujlgqbmpdkfayxrhtvsonzw.map(function(c) {
-    return izbsxrwpgacnfjulthovqmydek[c];
-}).join(''));
-</script>
+&#x74;&#x68;i&#115;&#x20;&#105;&#x73;&#x20;&#97; &#x73;e&#99;&#114;&#x65;&#x74;&#x21;
+
+<a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;o&#x62;fu&#x73;&#x63;&#x61;t&#101;&#64;&#106;oe.co&#x64;&#101;s">o&#98;f&#x75;s&#99;&#97;t&#101;&#x40;&#x6a;&#x6f;e&#46;&#99;&#x6f;d&#x65;s</a>
 ```
 
 ## Laravel
@@ -35,5 +32,6 @@ document.write(eciujlgqbmpdkfayxrhtvsonzw.map(function(c) {
 If you're using Laravel, this package automatically adds a Blade helper:
 
 ```blade
-@obfuscate('<a href="mailto:obfuscate@joe.codes">obfuscate@joe.codes</a>')
+@obfuscate('this is a secret!')
+@mailto('obfuscate@joe.codes')
 ```
